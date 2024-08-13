@@ -2,18 +2,19 @@
     "name": "node_markgroup_test",
     "version": "1.0.0",
     "description": "",
-    "type": "module",
-    "main": "app.ts",
+    "type": "commonjs",
+    "main": "main.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "nodemon ./dist/app.js"
+        "start": "nodemon ./dist/main.js"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
         "express": "^4.19.2",
-        "nodemon": "^3.1.4"
+        "nodemon": "^3.1.4",
+        "tslog": "^4.9.3"
     },
     "devDependencies": {
         "@types/express": "^4.17.21",

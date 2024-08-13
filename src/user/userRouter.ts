@@ -1,6 +1,6 @@
 import express from "express";
 
-var userRouter = express.Router();
+export const userRouter = express.Router();
 
 userRouter.get("/login", () => {
     console.log("login");

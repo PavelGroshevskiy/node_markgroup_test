@@ -3,10 +3,11 @@ import express, { Express, json } from 'express';
 import { inject, injectable } from 'inversify';
 import { Server } from 'http';
 import { LoggerService } from './logger/logger.service';
-import { UserController } from './user/user.controllers';
-import { ExeptionFilter } from './errors/exception.filter';
+import { UserController } from './user/user.controller';
+import { IExeptionFilter } from './errors/exception.filter';
+
+import { IConfigService } from './config/config-service.interface';
 import { TYPES } from './types';
-import { UserService } from './user/useService';
 
 @injectable()
 export class App {
@@ -18,7 +19,8 @@ export class App {
 	constructor(
 		@inject(TYPES.ILogger) private logger: LoggerService,
 		@inject(TYPES.UserController) private userController: UserController,
-		@inject(TYPES.ExeptionFilter) private exeptionFilter: ExeptionFilter,
+		@inject(TYPES.ExeptionFilter) private exeptionFilter: IExeptionFilter,
+		@inject(TYPES.ConfigService) private configService: IConfigService,
 	) {
 		this.app = express();
 

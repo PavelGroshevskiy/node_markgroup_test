@@ -8,6 +8,7 @@ import { IExeptionFilter } from './errors/exception.filter';
 
 import { IConfigService } from './config/config-service.interface';
 import { TYPES } from './types';
+import { PrismaService } from './database/prisma.service';
 
 @injectable()
 export class App {
@@ -21,6 +22,7 @@ export class App {
 		@inject(TYPES.UserController) private userController: UserController,
 		@inject(TYPES.ExeptionFilter) private exeptionFilter: IExeptionFilter,
 		@inject(TYPES.ConfigService) private configService: IConfigService,
+		@inject(TYPES.PrismaService) private prismaService: PrismaService,
 	) {
 		this.app = express();
 
@@ -40,6 +42,7 @@ export class App {
 	}
 
 	public async init(): Promise<void> {
+		await this.prismaService.connect();
 		this.userMiddleware();
 		this.userRoutes();
 		this.useExeptionFilters();

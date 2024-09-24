@@ -22,4 +22,6 @@ export class ConfigService implements IConfigService {
 	get(key: string): string {
 		return this.config[key];
 	}
+
+	genrate(key: string) {}
 }

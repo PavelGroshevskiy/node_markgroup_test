@@ -5,10 +5,10 @@ import { Server } from 'http';
 import { LoggerService } from './logger/logger.service';
 import { UserController } from './user/user.controller';
 import { IExeptionFilter } from './errors/exception.filter';
-
 import { IConfigService } from './config/config-service.interface';
 import { TYPES } from './types';
 import { PrismaService } from './database/prisma.service';
+import { AuthMiddleware } from './common/auth.middleware';
 
 @injectable()
 export class App {
@@ -31,6 +31,8 @@ export class App {
 
 	userMiddleware(): void {
 		this.app.use(json());
+		const authMiddleware = new AuthMiddleware(this.configService.get('SECRET'));
+		this.app.use(authMiddleware.execute.bind(authMiddleware));
 	}
 
 	userRoutes(): void {
